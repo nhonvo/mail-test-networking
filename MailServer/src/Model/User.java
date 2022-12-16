@@ -12,71 +12,87 @@ import java.sql.Date;
  */
 public class User {
 
-    protected String username;
-    protected String password;
-    protected String fullname;
-    protected String host;
-    protected int port;
-    protected Date dateCreated;
+  protected int id;
+  protected String username;
+  protected String password;
+  protected String fullname;
+  protected String host;
+  protected int port;
+  protected Date dateCreated;
 
-    public User() {
-    }
+  public User() {}
 
-    public User(String username, String password, String fullname, String host, int port, Date dateCreated) {
-        this.username = username;
-        this.password = password;
-        this.fullname = fullname;
-        this.host = host;
-        this.port = port;
-        this.dateCreated = dateCreated;
-    }
+  public User(
+    int id,
+    String username,
+    String password,
+    String fullname,
+    String host,
+    int port,
+    Date dateCreated
+  ) {
+    this.id = id;
+    this.username = username;
+    this.password = password;
+    this.fullname = fullname;
+    this.host = host;
+    this.port = port;
+    this.dateCreated = dateCreated;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public int getId() {
+    return id;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public String getFullname() {
-        return fullname;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public String getHost() {
-        return host;
-    }
+  public String getFullname() {
+    return fullname;
+  }
 
-    public int getPort() {
-        return port;
-    }
+  public String getHost() {
+    return host;
+  }
 
-    public Date getDateCreated() {
-        return dateCreated;
-    }
+  public int getPort() {
+    return port;
+  }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+  public Date getDateCreated() {
+    return dateCreated;
+  }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+  public void setId(int id) {
+    this.id = id;
+  }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
+  public void setUsername(String username) {
+    this.username = username;
+  }
 
-    public void setHost(String host) {
-        this.host = host;
-    }
+  public void setPassword(String password) {
+    this.password = password;
+  }
 
-    public void setPort(int port) {
-        this.port = port;
-    }
+  public void setFullname(String fullname) {
+    this.fullname = fullname;
+  }
 
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
+  public void setHost(String host) {
+    this.host = host;
+  }
 
+  public void setPort(int port) {
+    this.port = port;
+  }
+
+  public void setDateCreated(Date dateCreated) {
+    this.dateCreated = dateCreated;
+  }
 }
