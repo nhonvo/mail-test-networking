@@ -28,7 +28,7 @@ public class UserDTO {
     if (rs.next()) {
       JOptionPane.showMessageDialog(null, "Login successfully!");
       frmMain main = new frmMain();
-      main.show();
+      main.setVisible(true);
     } else {
       JOptionPane.showMessageDialog(null, "Login failed!");
     }
@@ -41,6 +41,7 @@ public class UserDTO {
     );
     User user = new User();
     if (rs.next()) {
+      user.setId(rs.getInt("id"));
       user.setUsername(rs.getString("username"));
       user.setPassword(rs.getString("password"));
       user.setFullname(rs.getString("fullname"));
@@ -49,5 +50,20 @@ public class UserDTO {
       user.setDateCreated(rs.getDate("datecreated"));
     }
     return user;
+  }
+
+  public boolean CheckUser(String username) {
+    DBAccess acc = new DBAccess();
+    ResultSet rs = acc.Query(
+      "select * from [user] where username = '" + username + "'"
+    );
+    try {
+      while (rs.next()) {
+        return true;
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+    return false;
   }
 }

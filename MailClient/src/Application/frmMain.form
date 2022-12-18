@@ -9,12 +9,12 @@
             <Property name="text" type="java.lang.String" value="System"/>
           </Properties>
           <SubComponents>
-            <MenuItem class="javax.swing.JMenuItem" name="mRegister">
+            <MenuItem class="javax.swing.JMenuItem" name="mSendMail">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Send mail"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mRegisterActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mSendMailActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mClose">

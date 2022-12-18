@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
  */
 public class frmLogin extends javax.swing.JFrame {
 
-    public static String user;
+    public static String USER;
 
     /**
      * Creates new form frmLogin
@@ -216,8 +216,7 @@ public class frmLogin extends javax.swing.JFrame {
           String password = txtPassword.getText().toString();
           UserDTO obj = new UserDTO();
           obj.Login(username, password);
-//          frmSendmail.jTextField1.setText(txtUsername.getText());
-          user = username;
+          USER = username;
       } catch (Exception e) {
       }
   }//GEN-LAST:event_btnLoginActionPerformed

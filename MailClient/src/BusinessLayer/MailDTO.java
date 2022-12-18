@@ -6,8 +6,15 @@ package BusinessLayer;
 
 import DataLayer.DBAccess;
 import Model.Mail;
+import Utility.*;
 import java.awt.List;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Date;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -66,7 +73,8 @@ public class MailDTO implements iMailDTO {
       while (rs.next()) {
         Mail mail = new Mail();
         mail.setTitle(rs.getString("title"));
-        mail.setContent(rs.getString("content"));
+        String encrypyt = rs.getString("content");
+        mail.setContent(AES.decrypt(encrypyt));
         mail.setDateCreated(rs.getDate("datecreated"));
         mail.setSender(rs.getInt(5));
         mail.setReceiver(rs.getInt(6));
@@ -117,18 +125,13 @@ public class MailDTO implements iMailDTO {
 
   public void send(int sender, int receiver, String title, String content) {
     DBAccess acc = new DBAccess();
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    LocalDateTime now = LocalDateTime.now();
+    String date = dtf.format(now);
     String sql =
-      "insert into mail(title, content, datecreated, sender, receiver) values('" +
-      title +
-      "', '" +
-      content +
-      "', now(), " +
-      sender +
-      ", " +
-      receiver +
-      ")";
+      "insert into mail values  (N'" + title + "', N'" + AES.encrypt(content) + "', 20/10/2022, " + sender + ", " + receiver + ")";
     int rs = acc.Update(sql);
-    if (rs != 0) {
+    if (rs > 0) {
       JOptionPane.showMessageDialog(null, "Send mail successfully!");
     } else {
       JOptionPane.showMessageDialog(null, "Send mail failed!");

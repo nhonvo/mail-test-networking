@@ -41,7 +41,7 @@ public class Mail {
     return (
       title +
       " - " +
-      content.substring(0, 10) +
+      content.substring(0, 2) +
       " - " +
       dateCreated +
       " - " +

@@ -1,15 +1,14 @@
 package BusinessLayer;
 
-import java.util.ArrayList;
-
 import Model.Mail;
+import java.util.ArrayList;
 
 /**
  *
  * @author vothu
  */
 
-public interface iMailDTO  {
+public interface iMailDTO {
   public ArrayList<Mail> Getlist();
 
   public Mail GetMailById(int id);
