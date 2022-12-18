@@ -227,9 +227,9 @@ public class frmSendmail extends javax.swing.JFrame {
     pack();
   } // </editor-fold>//GEN-END:initComponents
 
-  private void txtSubjectActionPerformed(java.awt.event.ActionEvent evt) {} //GEN-FIRST:event_txtSubjectActionPerformed //GEN-LAST:event_txtSubjectActionPerformed
+  private void txtSubjectActionPerformed(java.awt.event.ActionEvent evt) {}                                                                                       
 
-  private void btnSendActionPerformed(java.awt.event.ActionEvent evt) { //GEN-FIRST:event_btnSendActionPerformed
+  private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
     MailDTO mail = new MailDTO();
     UserDTO user = new UserDTO();
     String username = USER;
@@ -241,7 +241,7 @@ public class frmSendmail extends javax.swing.JFrame {
       try {
         User fromUser = user.GetUserByUserName(username);
         User toUser = user.GetUserByUserName(to);
-        mail.send(fromUser.getId(), toUser.getId(), "User not found", "User not exist in database check the username");
+        mail.send(fromUser.getId(), fromUser.getId(), "User not found", "User not exist in database check the username. Please try again");
         System.out.println("to" + toUser.getId());
         System.out.println("from" + fromUser.getId());
       } catch (Exception e) {
@@ -260,7 +260,7 @@ public class frmSendmail extends javax.swing.JFrame {
           .log(Level.SEVERE, null, ex);
       }
     }
-  } //GEN-LAST:event_btnSendActionPerformed
+  }//GEN-LAST:event_btnSendActionPerformed
 
   /**
    * @param args the command line arguments
