@@ -12,6 +12,7 @@ import java.util.Date;
  */
 public class Mail {
 
+  protected int id;
   protected String title;
   protected String content;
   protected Date dateCreated;
@@ -21,17 +22,47 @@ public class Mail {
   public Mail() {}
 
   public Mail(
+    int id,
     String title,
     String content,
     Date dateCreated,
     int sender,
     int receiver
   ) {
+    this.id = id;
     this.title = title;
     this.content = content;
     this.dateCreated = dateCreated;
     this.sender = sender;
     this.receiver = receiver;
+  }
+
+  public String getSummary() {
+    return (
+      title +
+      " - " +
+      content.substring(0, 2) +
+      " - " +
+      dateCreated +
+      " - " +
+      sender +
+      " - " +
+      receiver
+    );
+  }
+
+  public String getAll() {
+    return (
+      title +
+      " - " +
+      content +
+      " - " +
+      dateCreated +
+      " - " +
+      sender +
+      " - " +
+      receiver
+    );
   }
 
   public String getTitle() {
