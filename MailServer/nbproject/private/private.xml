@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/phamd/Documents/NetBeansProjects/mail/mail-test-networking/MailServer/src/Model/ServerThread.java</file>
+            <file>file:/C:/Users/phamd/Documents/NetBeansProjects/mail/mail-test-networking/MailServer/src/Model/StringUtils.java</file>
+            <file>file:/C:/Users/phamd/Documents/NetBeansProjects/mail/mail-test-networking/MailServer/src/Model/Request.java</file>
+            <file>file:/C:/Users/phamd/Documents/NetBeansProjects/mail/mail-test-networking/MailServer/src/Model/LoginModel.java</file>
+            <file>file:/C:/Users/phamd/Documents/NetBeansProjects/mail/mail-test-networking/MailServer/src/Model/MailServer.java</file>
+            <file>file:/C:/Users/phamd/Documents/NetBeansProjects/mail/mail-test-networking/MailServer/src/Model/MailModel.java</file>
+        </group>
+    </open-files>
 </project-private>

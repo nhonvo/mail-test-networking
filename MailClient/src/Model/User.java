@@ -54,7 +54,7 @@ public class User {
     public void setFullname(String fullname) {
         this.fullname = fullname;
     }
-    
+
     public void setDateCreated(Date dateCreated) {
         this.dateCreated = dateCreated;
     }

@@ -69,4 +69,5 @@ public class MailModel {
         this.receiver = receiver;
     }
     
+    
 }

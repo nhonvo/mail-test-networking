@@ -4,27 +4,20 @@
  */
 package Model;
 
-import java.sql.Date;
-
 /**
  *
  * @author vothu
  */
-public class User {
-
+public class LoginModel {
     protected String username;
     protected String password;
-    protected String fullname;
-    protected Date dateCreated;
 
-    public User() {
-    }
-
-    public User(String username, String password, String fullname, String host, int port, Date dateCreated) {
+    public LoginModel(String username, String password) {
         this.username = username;
         this.password = password;
-        this.fullname = fullname;
-        this.dateCreated = dateCreated;
+    }
+
+    public LoginModel() {
     }
 
     public String getUsername() {
@@ -35,14 +28,6 @@ public class User {
         return password;
     }
 
-    public String getFullname() {
-        return fullname;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
     public void setUsername(String username) {
         this.username = username;
     }
@@ -50,13 +35,5 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
     
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
 }
