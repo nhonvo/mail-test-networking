@@ -14,7 +14,7 @@ public class MailModel {
 
     public MailModel() {
     }
-    protected int id;
+
     protected String title;
     protected String content;
     protected Date dateCreated;
@@ -27,32 +27,6 @@ public class MailModel {
         this.dateCreated = dateCreated;
         this.sender = sender;
         this.receiver = receiver;
-    }
-
-    public String getSummary() {
-        return (id
-                + " - \nTitle:"
-                + title
-                + " - \nMessage:"
-                + content.substring(0, 10)
-                + " - \nDate:"
-                + dateCreated);
-    }
-
-    public String getAll() {
-        return (title
-                + " - "
-                + content
-                + " - "
-                + dateCreated
-                + " - "
-                + sender
-                + " - "
-                + receiver);
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getTitle() {
@@ -94,9 +68,5 @@ public class MailModel {
     public void setReceiver(String receiver) {
         this.receiver = receiver;
     }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
+    
 }

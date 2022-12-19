@@ -27,8 +27,8 @@ public class UserDTO {
     );
     if (rs.next()) {
       JOptionPane.showMessageDialog(null, "Login successfully!");
-      frmMain main = new frmMain();
-      main.setVisible(true);
+//      frmMain main = new frmMain();
+//      main.setVisible(true);
     } else {
       JOptionPane.showMessageDialog(null, "Login failed!");
     }

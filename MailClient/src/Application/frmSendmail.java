@@ -8,7 +8,16 @@ import static Application.frmLogin.USER;
 
 import BusinessLayer.MailDTO;
 import BusinessLayer.UserDTO;
+import Model.MailModel;
+import Model.Request;
+import Model.StringUtils;
 import Model.User;
+import com.google.gson.Gson;
+import java.io.DataInput;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.net.Socket;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,10 +31,16 @@ public class frmSendmail extends javax.swing.JFrame {
   /**
    * Creates new form frmSendmail
    */
+  public Socket socket;
+  public String username;
   public frmSendmail() {
     initComponents();
   }
-
+  public frmSendmail(String username,Socket socket) {
+    initComponents();
+    this.socket = socket;
+    this.username = username;
+  }
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -230,36 +245,24 @@ public class frmSendmail extends javax.swing.JFrame {
   private void txtSubjectActionPerformed(java.awt.event.ActionEvent evt) {}                                                                                       
 
   private void btnSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendActionPerformed
-    MailDTO mail = new MailDTO();
-    UserDTO user = new UserDTO();
-    String username = USER;
-    String to = txtReciver.getText();
-    if (USER.equals(to)) {
-      JOptionPane.showMessageDialog(null, "You can't send mail to yourself ");
-    } else if (user.CheckUser(to) == false) {
-      JOptionPane.showMessageDialog(null, "User not found");
-      try {
-        User fromUser = user.GetUserByUserName(username);
-        User toUser = user.GetUserByUserName(to);
-        mail.send(fromUser.getId(), fromUser.getId(), "User not found", "User not exist in database check the username. Please try again");
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
-    } else {
-      String subject = txtSubject.getText();
-      String message = txtMessage.getText();
-      try {
-        User fromUser = user.GetUserByUserName(username);
-        User toUser = user.GetUserByUserName(to);
-        mail.send(fromUser.getId(), toUser.getId(), subject, message);
-      } catch (Exception ex) {
-        Logger
-          .getLogger(frmSendmail.class.getName())
-          .log(Level.SEVERE, null, ex);
-      }
-    }
-    frmMain frm = new frmMain();
-    frm.setVisible(true);
+    try{
+        if(socket==null){
+            JOptionPane.showMessageDialog(rootPane, "Khong the gui mail");
+            return;
+        }
+        DataInputStream in = new DataInputStream(socket.getInputStream());
+        DataOutputStream out = new DataOutputStream(socket.getOutputStream());
+        Date today = new Date(System.currentTimeMillis());
+        MailModel mail = new MailModel(txtSubject.getText(),txtMessage.getText(),today,username,txtReciver.getText());
+        Request r = new Request(StringUtils.SENDMAIL, mail);
+        Gson gson = new Gson();
+        String s = gson.toJson(r);
+        out.writeUTF(s);
+        s = in.readUTF();
+        JOptionPane.showMessageDialog(rootPane, s);
+        if(s.equals(StringUtils.SENDED))
+            this.dispose();
+    }catch(Exception e){}
   }//GEN-LAST:event_btnSendActionPerformed
 
   /**

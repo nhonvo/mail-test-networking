@@ -8,6 +8,10 @@ package Application;
 import BusinessLayer.MailDTO;
 import BusinessLayer.UserDTO;
 import Model.Mail;
+import Model.MailClient;
+import Model.MailModel;
+import Model.UpdateThread;
+import java.net.Socket;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -21,18 +25,28 @@ public class frmMain extends javax.swing.JFrame {
   /**
    * Creates new form frmMain
    */
-  public frmMain() {
-    initComponents();
-    FillSummaryList();
+  public String username;
+  public Socket socket;
+  public ArrayList<MailModel> listMail =  new ArrayList<>();
+  public frmMain(){
+      initComponents();
+//      FillSummaryList();
   }
-
+  public frmMain(String username,Socket socket) {
+    this.username = username;
+    this.socket = socket;
+    UpdateThread auto = new UpdateThread(socket);
+    auto.main = this;
+    auto.start();
+    initComponents();
+  }
   public void FillSummaryList() {
     DefaultListModel dm = new DefaultListModel();
 
-    MailDTO mail = new MailDTO();
-    ArrayList<Mail> list = mail.Getlist();
-    for (int i = 0; i < list.size(); i++) {
-      dm.addElement(list.get(i).getSummary());
+//    MailDTO mail = new MailDTO();
+//    ArrayList<MailModel> list = mail.Getlist();
+    for (int i = 0; i < listMail.size(); i++) {
+      dm.addElement(listMail.get(i).getSummary());
     }
     lstMail.setModel(dm);
   }
@@ -47,6 +61,7 @@ public class frmMain extends javax.swing.JFrame {
     lblFrom.setText(user.GetUserById(from).getUsername());
   }
 
+  
   /**
    * This method is called from within the constructor to initialize the form.
    * WARNING: Do NOT modify this code. The content of this method is always
@@ -309,7 +324,7 @@ public class frmMain extends javax.swing.JFrame {
 
   private void mSendMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mSendMailActionPerformed
     // TODO add your handling code here:
-    frmSendmail frm = new frmSendmail();
+    frmSendmail frm = new frmSendmail(username,socket);
     frm.setVisible(true);
   }//GEN-LAST:event_mSendMailActionPerformed
 
@@ -331,7 +346,7 @@ public class frmMain extends javax.swing.JFrame {
   // Solution: use
   private void lstMailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lstMailMouseClicked
     int index = Integer.parseInt(lstMail.getSelectedValue().substring(0, 1));
-    FillDetailMail(index);
+//    FillDetailMail(index);
   }//GEN-LAST:event_lstMailMouseClicked
 
   /**
