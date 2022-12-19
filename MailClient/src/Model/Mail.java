@@ -39,15 +39,13 @@ public class Mail {
 
   public String getSummary() {
     return (
+      id +
+      " - \nTitle:" +
       title +
-      " - " +
-      content.substring(0, 2) +
-      " - " +
-      dateCreated +
-      " - " +
-      sender +
-      " - " +
-      receiver
+      " - \nMessage:" +
+      content.substring(0, 10) +
+      " - \nDate:" +
+      dateCreated 
     );
   }
 
@@ -63,6 +61,10 @@ public class Mail {
       " - " +
       receiver
     );
+  }
+
+  public int getId() {
+    return id;
   }
 
   public String getTitle() {
@@ -83,6 +85,10 @@ public class Mail {
 
   public int getReceiver() {
     return receiver;
+  }
+
+  public void setId(int id) {
+    this.id = id;
   }
 
   public void setTitle(String title) {

@@ -242,8 +242,6 @@ public class frmSendmail extends javax.swing.JFrame {
         User fromUser = user.GetUserByUserName(username);
         User toUser = user.GetUserByUserName(to);
         mail.send(fromUser.getId(), fromUser.getId(), "User not found", "User not exist in database check the username. Please try again");
-        System.out.println("to" + toUser.getId());
-        System.out.println("from" + fromUser.getId());
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -260,6 +258,8 @@ public class frmSendmail extends javax.swing.JFrame {
           .log(Level.SEVERE, null, ex);
       }
     }
+    frmMain frm = new frmMain();
+    frm.setVisible(true);
   }//GEN-LAST:event_btnSendActionPerformed
 
   /**

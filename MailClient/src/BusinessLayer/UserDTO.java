@@ -45,8 +45,6 @@ public class UserDTO {
       user.setUsername(rs.getString("username"));
       user.setPassword(rs.getString("password"));
       user.setFullname(rs.getString("fullname"));
-      user.setHost(rs.getString("host"));
-      user.setPort(rs.getInt("port"));
       user.setDateCreated(rs.getDate("datecreated"));
     }
     return user;
@@ -65,5 +63,24 @@ public class UserDTO {
       JOptionPane.showMessageDialog(null, e);
     }
     return false;
+  }
+  public User GetUserById(int id){
+    DBAccess acc = new DBAccess();
+    ResultSet rs = acc.Query(
+      "select * from [user] where id = '" + id + "'"
+    );
+    User user = new User();
+    try {
+      while (rs.next()) {
+        user.setId(rs.getInt("id"));
+        user.setUsername(rs.getString("username"));
+        user.setPassword(rs.getString("password"));
+        user.setFullname(rs.getString("fullname"));
+        user.setDateCreated(rs.getDate("datecreated"));
+      }
+    } catch (Exception e) {
+      JOptionPane.showMessageDialog(null, e);
+    }
+    return user;
   }
 }

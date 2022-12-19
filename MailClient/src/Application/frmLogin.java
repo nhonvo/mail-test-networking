@@ -5,11 +5,7 @@
  */
 package Application;
 
-import BusinessLayer.MailDTO;
 import BusinessLayer.UserDTO;
-import DataLayer.DBAccess;
-import java.sql.ResultSet;
-import javax.swing.JOptionPane;
 
 /**
  *

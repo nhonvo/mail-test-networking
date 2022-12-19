@@ -7,18 +7,12 @@ package BusinessLayer;
 import DataLayer.DBAccess;
 import Model.Mail;
 import Utility.*;
-import java.awt.List;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class MailDTO implements iMailDTO {
@@ -72,8 +66,8 @@ public class MailDTO implements iMailDTO {
         try {
             while (rs.next()) {
                 Mail mail = new Mail();
+                mail.setId(rs.getInt("id"));
                 mail.setTitle(rs.getString("title"));
-//                mail.setContent("content");
                 String sth = rs.getString("content");
                 String str = AES.decrypt(sth);
                 mail.setContent(str);
