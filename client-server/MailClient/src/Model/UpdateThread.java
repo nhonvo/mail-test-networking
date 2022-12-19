@@ -43,7 +43,7 @@ public class UpdateThread extends Thread{
                         break;
                     }
                 }
-                sleep(1000);
+                sleep(6000);
             }
         }catch(Exception e){
         e.printStackTrace();}
