@@ -7,77 +7,30 @@ package BusinessLayer;
 import DataLayer.DBAccess;
 import Model.Mail;
 import Utility.*;
-import java.awt.List;
-import java.math.BigInteger;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.sql.Date;
 import java.sql.ResultSet;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.DefaultListModel;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 public class MailDTO implements iMailDTO {
 
     // Validate ip/domain
-    private static final Pattern PATTERN = Pattern.compile(
-            "^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$"
-    );
-
-    public static boolean IsValidIpAddress(final String ip) {
-        return PATTERN.matcher(ip).matches();
-    }
-
-    public static boolean IsValidDomain(String str) {
-        // Regex to check valid domain name.
-        String regex
-                = "^((?!-)[A-Za-z0-9-]" + "{1,63}(?<!-)\\.)" + "+[A-Za-z]{2,6}";
-
-        // Compile the ReGex
-        Pattern p = Pattern.compile(regex);
-
-        // If the string is empty
-        // return false
-        if (str == null) {
-            return false;
-        }
-
-        // Pattern class contains matcher()
-        // method to find the matching
-        // between the given string and
-        // regular expression.
-        Matcher m = p.matcher(str);
-
-        // Return if the string
-        // matched the ReGex
-        return m.matches();
-    }
-
-    public boolean checkDomainIp(String domainIp) {
-        if (IsValidIpAddress(domainIp) || IsValidDomain(domainIp)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public ArrayList<Mail> Getlist() {
         ArrayList<Mail> list = new ArrayList<Mail>();
         DBAccess acc = new DBAccess();
-        ResultSet rs = acc.Query("select * from mail");
+        ResultSet rs = acc.Query("select * from mail order by datecreated");
         try {
             while (rs.next()) {
                 Mail mail = new Mail();
+                mail.setId(rs.getInt("id"));
                 mail.setTitle(rs.getString("title"));
-//                mail.setContent("content");
                 String sth = rs.getString("content");
                 String str = AES.decrypt(sth);
                 mail.setContent(str);
-                mail.setDateCreated(rs.getDate("datecreated"));
+                mail.setDateCreated(rs.getTimestamp("datecreated"));
+                // thử xem
                 mail.setSender(rs.getInt(5));
                 mail.setReceiver(rs.getInt(6));
                 list.add(mail);
@@ -96,7 +49,7 @@ public class MailDTO implements iMailDTO {
         try {
             while (rs.next()) {
                 mail.setTitle(rs.getString("title"));
-//                mail.setContent(rs.getString("content"));
+                //                mail.setContent(rs.getString("content"));
                 String sth = rs.getString("content");
                 String str = AES.decrypt(sth);
                 mail.setContent(str);
@@ -128,18 +81,25 @@ public class MailDTO implements iMailDTO {
         return mail;
     }
 
-    public void send(int sender, int receiver, String title, String content) {
+    public boolean send(
+            int sender,
+            int receiver,
+            String title,
+            String content,
+            Date dateSend
+    ) {
         DBAccess acc = new DBAccess();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDateTime now = LocalDateTime.now();
-        String date = dtf.format(now);
+        DateFormat dateFormat = new SimpleDateFormat("dd-mm-yyyy hh:mm:ss");
+        String strDate = dateFormat.format(dateSend);
         String sql
-                = "insert into mail values  (N'" + title + "', N'" + AES.encrypt(content) + "', 20/10/2022, " + sender + ", " + receiver + ")";
+                = "insert into mail values  (N'" + title + "', N'" + AES.encrypt(content) + "', GETDATE(), " + sender + ", " + receiver + ")";
         int rs = acc.Update(sql);
         if (rs > 0) {
-            JOptionPane.showMessageDialog(null, "Send mail successfully!");
+            return true;
+//            JOptionPane.showMessageDialog(null, "Send mail successfully!");
         } else {
-            JOptionPane.showMessageDialog(null, "Send mail failed!");
+            return false;
+//            JOptionPane.showMessageDialog(null, "Send mail failed!");
         }
     }
 }

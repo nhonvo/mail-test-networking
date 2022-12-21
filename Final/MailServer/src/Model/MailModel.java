@@ -14,14 +14,15 @@ public class MailModel {
 
     public MailModel() {
     }
-
+    protected int id;
     protected String title;
     protected String content;
     protected Date dateCreated;
     protected String sender;
     protected String receiver;
 
-    public MailModel(String title, String content, Date dateCreated, String sender, String receiver) {
+    public MailModel(int id,String title, String content, Date dateCreated, String sender, String receiver) {
+        this.id = id;
         this.title = title;
         this.content = content;
         this.dateCreated = dateCreated;
@@ -68,6 +69,17 @@ public class MailModel {
     public void setReceiver(String receiver) {
         this.receiver = receiver;
     }
-    
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+     @Override
+    public String toString(){
+        return "sender:@"+sender+"receiver: @"+receiver+"subject: "+title;
+    }
     
 }

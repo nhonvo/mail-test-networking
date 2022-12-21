@@ -2,6 +2,7 @@ package BusinessLayer;
 
 import Model.Mail;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -15,5 +16,5 @@ public interface iMailDTO {
 
   public Mail GetSingleMailById(int id);
 
-  public void send(int sender, int receiver, String title, String content);
+  public boolean send(int sender, int receiver, String title, String content, Date dateSend);
 }
